@@ -57,6 +57,9 @@
 
 - (void) loadEpub:(NSURL*) epubURL;
 
+-(void)loadConfHTML;
+-(void)saveConfHTML;
+
 @property (nonatomic, retain) EPub* loadedEpub;
 
 @property (nonatomic, retain) SearchResult* currentSearchResult;

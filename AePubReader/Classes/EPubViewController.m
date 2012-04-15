@@ -28,6 +28,8 @@
 
 - (void) loadSpine:(int)spineIndex atPageIndex:(int)pageIndex;
 
+-(void)loadConfHTML;
+-(void)saveConfHTML;
 
 @end
 
@@ -172,6 +174,8 @@
 				[incTextSizeButton setEnabled:NO];
 			}
 			[decTextSizeButton setEnabled:YES];
+			
+			[self saveConfHTML];
 		}
 	}
 }
@@ -184,6 +188,8 @@
 				[decTextSizeButton setEnabled:NO];
 			}
 			[incTextSizeButton setEnabled:YES];
+			
+			[self saveConfHTML];
 		}
 	}
 }
@@ -321,6 +327,25 @@
 	return YES;
 }
 
+-(void)saveConfHTML{
+
+	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+	[defs setInteger:currentTextSize forKey:@"fontSize"];
+	[defs synchronize];
+
+}
+
+-(void)loadConfHTML{
+
+	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+	
+	int fSize = [defs integerForKey:@"fontSize"];
+	
+	if(fSize) {
+		currentTextSize = fSize;
+	}
+}
+
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -337,7 +362,9 @@
 			sv.bounces = NO;
 		}
 	}
-	currentTextSize = 100;	 
+	currentTextSize = 100;
+	[self loadConfHTML];
+	
 	
 	UISwipeGestureRecognizer* rightSwipeRecognizer = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gotoNextPage)] autorelease];
 	[rightSwipeRecognizer setDirection:UISwipeGestureRecognizerDirectionLeft];
