@@ -23,6 +23,7 @@
     int chapterIndex;
     CGRect windowSize;
     int fontPercentSize;
+	NSString *fontFamily;
 }
 
 @property (nonatomic, assign) id delegate;
@@ -33,5 +34,6 @@
 - (id) initWithPath:(NSString*)theSpinePath title:(NSString*)theTitle chapterIndex:(int) theIndex;
 
 - (void) loadChapterWithWindowSize:(CGRect)theWindowSize fontPercentSize:(int) theFontPercentSize;
+- (void) loadChapterWithWindowSize:(CGRect)theWindowSize fontPercentSize:(int) theFontPercentSize fontFamily:(NSString*)theFontFamily;
 
 @end

@@ -13,6 +13,8 @@
 #import "UIWebView+SearchWebView.h"
 #import "Chapter.h"
 
+#import "FontView.h"
+
 @interface EPubViewController()
 
 
@@ -39,6 +41,7 @@
 @synthesize chapterListButton, decTextSizeButton, incTextSizeButton;
 @synthesize currentPageLabel, pageSlider, searching;
 @synthesize currentSearchResult;
+@synthesize fontListButton;
 
 #pragma mark -
 
@@ -60,7 +63,8 @@
 
 	if(chapter.chapterIndex + 1 < [loadedEpub.spineArray count]){
 		[[loadedEpub.spineArray objectAtIndex:chapter.chapterIndex+1] setDelegate:self];
-		[[loadedEpub.spineArray objectAtIndex:chapter.chapterIndex+1] loadChapterWithWindowSize:webView.bounds fontPercentSize:currentTextSize];
+		//[[loadedEpub.spineArray objectAtIndex:chapter.chapterIndex+1] loadChapterWithWindowSize:webView.bounds fontPercentSize:currentTextSize];
+		[[loadedEpub.spineArray objectAtIndex:chapter.chapterIndex+1] loadChapterWithWindowSize:webView.bounds fontPercentSize:currentTextSize fontFamily:currentFontText];
 		[currentPageLabel setText:[NSString stringWithFormat:@"?/%d", totalPagesCount]];
 	} else {
 		[currentPageLabel setText:[NSString stringWithFormat:@"%d/%d",[self getGlobalPageCount], totalPagesCount]];
@@ -258,6 +262,7 @@
 	NSString *insertRule1 = [NSString stringWithFormat:@"addCSSRule('html', 'padding: 0px; height: %fpx; -webkit-column-gap: 0px; -webkit-column-width: %fpx;')", webView.frame.size.height, webView.frame.size.width];
 	NSString *insertRule2 = [NSString stringWithFormat:@"addCSSRule('p', 'text-align: justify;')"];
 	NSString *setTextSizeRule = [NSString stringWithFormat:@"addCSSRule('body', '-webkit-text-size-adjust: %d%%;')", currentTextSize];
+	NSString *setFontFamilyRule = [NSString stringWithFormat:@"addCSSRule('body', 'font-family:\"%@\" !important;')", currentFontText];
 	NSString *setHighlightColorRule = [NSString stringWithFormat:@"addCSSRule('highlight', 'background-color: yellow;')"];
 
 	
@@ -270,6 +275,8 @@
 	[webView stringByEvaluatingJavaScriptFromString:insertRule2];
 	
 	[webView stringByEvaluatingJavaScriptFromString:setTextSizeRule];
+	
+	[webView stringByEvaluatingJavaScriptFromString:setFontFamilyRule];
 	
 	[webView stringByEvaluatingJavaScriptFromString:setHighlightColorRule];
 	
@@ -293,7 +300,8 @@
             totalPagesCount=0;
             [self loadSpine:currentSpineIndex atPageIndex:currentPageInSpineIndex];
             [[loadedEpub.spineArray objectAtIndex:0] setDelegate:self];
-            [[loadedEpub.spineArray objectAtIndex:0] loadChapterWithWindowSize:webView.bounds fontPercentSize:currentTextSize];
+            //[[loadedEpub.spineArray objectAtIndex:0] loadChapterWithWindowSize:webView.bounds fontPercentSize:currentTextSize];
+			[[loadedEpub.spineArray objectAtIndex:0] loadChapterWithWindowSize:webView.bounds fontPercentSize:currentTextSize fontFamily:currentFontText];
             [currentPageLabel setText:@"?/?"];
         }
 	}
@@ -316,6 +324,63 @@
 	}
 }
 
+- (IBAction) fontClicked:(id)sender{
+
+	if (fontPopover == nil) {
+		
+		if (fontView == nil) {
+			fontView = [[FontView alloc] initWithNibName:@"FontView" bundle:nil];
+			[fontView setEpubViewController:self];
+		}
+		
+		fontPopover = [[UIPopoverController alloc] initWithContentViewController:fontView];
+		[fontPopover setPopoverContentSize:CGSizeMake(200, 300)];
+	}
+	
+	if (![fontPopover isPopoverVisible]) {
+	
+		[fontView setFontName:currentFontText];
+		[fontView resetButtonsTextColors];
+		[chaptersPopover presentPopoverFromBarButtonItem:chapterListButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+		
+		[fontPopover presentPopoverFromBarButtonItem:fontListButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+	}
+}
+
+-(void)changeFont:(NSString*)fontName{
+	
+	currentFontText = fontName;
+	[self updatePagination];
+	[self saveConfHTML];
+
+	NSLog(@"la actual fuente %@",currentFontText);
+}
+
+-(void)saveConfHTML{
+	
+	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+	[defs setInteger:currentTextSize forKey:@"fontSize"];
+	[defs setObject:currentFontText forKey:@"fontName"];
+	[defs synchronize];
+}
+
+-(void)loadConfHTML{
+	
+	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+	
+	int fSize = [defs integerForKey:@"fontSize"];
+	
+	if(fSize) {
+		currentTextSize = fSize;
+	}
+	
+	NSString *fName = [defs stringForKey:@"fontName"];
+	
+	if (fName) {
+		currentFontText = fName;
+	}
+}
+
 
 #pragma mark -
 #pragma mark Rotation support
@@ -325,25 +390,6 @@
     NSLog(@"shouldAutorotate");
     [self updatePagination];
 	return YES;
-}
-
--(void)saveConfHTML{
-
-	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-	[defs setInteger:currentTextSize forKey:@"fontSize"];
-	[defs synchronize];
-
-}
-
--(void)loadConfHTML{
-
-	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-	
-	int fSize = [defs integerForKey:@"fontSize"];
-	
-	if(fSize) {
-		currentTextSize = fSize;
-	}
 }
 
 #pragma mark -
@@ -363,6 +409,7 @@
 		}
 	}
 	currentTextSize = 100;
+	currentFontText = @"Times New Roman";
 	[self loadConfHTML];
 	
 	

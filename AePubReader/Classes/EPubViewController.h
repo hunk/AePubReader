@@ -13,6 +13,7 @@
 
 @class SearchResultsViewController;
 @class SearchResult;
+@class FontView;
 
 @interface EPubViewController : UIViewController <UIWebViewDelegate, ChapterDelegate, UISearchBarDelegate> {
     
@@ -34,6 +35,8 @@
 	int pagesInCurrentSpineCount;
 	int currentTextSize;
 	int totalPagesCount;
+	
+	NSString *currentFontText;
     
     BOOL epubLoaded;
     BOOL paginating;
@@ -41,14 +44,19 @@
     
     UIPopoverController* chaptersPopover;
     UIPopoverController* searchResultsPopover;
+	UIPopoverController *fontPopover;
 
     SearchResultsViewController* searchResViewController;
     SearchResult* currentSearchResult;
+	FontView *fontView;
+	
+	UIBarButtonItem* fontListButton;
 }
 
 - (IBAction) showChapterIndex:(id)sender;
 - (IBAction) increaseTextSizeClicked:(id)sender;
 - (IBAction) decreaseTextSizeClicked:(id)sender;
+- (IBAction) fontClicked:(id)sender;
 - (IBAction) slidingStarted:(id)sender;
 - (IBAction) slidingEnded:(id)sender;
 - (IBAction) doneClicked:(id)sender;
@@ -59,6 +67,7 @@
 
 -(void)loadConfHTML;
 -(void)saveConfHTML;
+-(void)changeFont:(NSString*)fontName;
 
 @property (nonatomic, retain) EPub* loadedEpub;
 
@@ -77,5 +86,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *currentPageLabel;
 
 @property BOOL searching;
+
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *fontListButton;
 
 @end

@@ -36,6 +36,17 @@
     [webView loadRequest:urlRequest];
 }
 
+- (void) loadChapterWithWindowSize:(CGRect)theWindowSize fontPercentSize:(int) theFontPercentSize fontFamily:(NSString*)theFontFamily{
+	fontPercentSize = theFontPercentSize;
+    windowSize = theWindowSize;
+	fontFamily = theFontFamily;
+	//  NSLog(@"webviewSize: %f * %f, fontPercentSize: %d", theWindowSize.size.width, theWindowSize.size.height,theFontPercentSize);
+    UIWebView* webView = [[UIWebView alloc] initWithFrame:windowSize];
+    [webView setDelegate:self];
+    NSURLRequest* urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:spinePath]];
+    [webView loadRequest:urlRequest];
+}
+
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     NSLog(@"%@", error);
 	[webView dealloc];
@@ -58,7 +69,7 @@
 	NSString *insertRule1 = [NSString stringWithFormat:@"addCSSRule('html', 'padding: 0px; height: %fpx; -webkit-column-gap: 0px; -webkit-column-width: %fpx;')", webView.frame.size.height, webView.frame.size.width];
 	NSString *insertRule2 = [NSString stringWithFormat:@"addCSSRule('p', 'text-align: justify;')"];
 	NSString *setTextSizeRule = [NSString stringWithFormat:@"addCSSRule('body', '-webkit-text-size-adjust: %d%%;')",fontPercentSize];
-    
+    NSString *setFontFamilyRule = [NSString stringWithFormat:@"addCSSRule('body', 'font-family:\"%@\" !important;')", fontFamily];
 	
 	[webView stringByEvaluatingJavaScriptFromString:varMySheet];
 	
@@ -69,6 +80,8 @@
 	[webView stringByEvaluatingJavaScriptFromString:insertRule2];
 	
     [webView stringByEvaluatingJavaScriptFromString:setTextSizeRule];
+	
+	[webView stringByEvaluatingJavaScriptFromString:setFontFamilyRule];
     
 	int totalWidth = [[webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollWidth"] intValue];
 	pageCount = (int)((float)totalWidth/webView.bounds.size.width);
