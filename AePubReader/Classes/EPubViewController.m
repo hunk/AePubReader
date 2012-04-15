@@ -14,6 +14,7 @@
 #import "Chapter.h"
 
 #import "FontView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface EPubViewController()
 
@@ -133,6 +134,12 @@
 	if(!paginating){
 		if(currentSpineIndex+1<[loadedEpub.spineArray count]){
 			[self loadSpine:++currentSpineIndex atPageIndex:0];
+			CATransition *transition = [CATransition animation];
+			[transition setDelegate:self];
+			[transition setDuration:0.5f];
+			[transition setType:@"pageCurl"];
+			[transition setSubtype:@"fromRight"];
+			[self.view.layer addAnimation:transition forKey:@"CurlAnim"];
 		}	
 	}
 }
@@ -140,6 +147,7 @@
 - (void) gotoPrevSpine {
 	if(!paginating){
 		if(currentSpineIndex-1>=0){
+			NSLog(@"re");
 			[self loadSpine:--currentSpineIndex atPageIndex:0];
 		}	
 	}
@@ -149,6 +157,12 @@
 	if(!paginating){
 		if(currentPageInSpineIndex+1<pagesInCurrentSpineCount){
 			[self gotoPageInCurrentSpine:++currentPageInSpineIndex];
+			CATransition *transition = [CATransition animation];
+			[transition setDelegate:self];
+			[transition setDuration:0.5f];
+			[transition setType:@"pageCurl"];
+			[transition setSubtype:@"fromRight"];
+			[self.view.layer addAnimation:transition forKey:@"CurlAnim"];
 		} else {
 			[self gotoNextSpine];
 		}		
@@ -157,17 +171,29 @@
 
 - (void) gotoPrevPage {
 	if (!paginating) {
-		if(currentPageInSpineIndex-1>=0){
+		if(currentPageInSpineIndex-1>=0){ NSLog(@"uno");
+			CATransition *transition = [CATransition animation];
+			[transition setDelegate:self];
+			[transition setDuration:0.5f];
+			[transition setType:@"pageUnCurl"];
+			[transition setSubtype:@"fromRight"];
+			[self.view.layer addAnimation:transition forKey:@"UnCurlAnim"];
 			[self gotoPageInCurrentSpine:--currentPageInSpineIndex];
+			
 		} else {
-			if(currentSpineIndex!=0){
+			if(currentSpineIndex!=0){ NSLog(@"dos");
+				CATransition *transition = [CATransition animation];
+				[transition setDelegate:self];
+				[transition setDuration:0.5f];
+				[transition setType:@"pageUnCurl"];
+				[transition setSubtype:@"fromRight"];
+				[self.view.layer addAnimation:transition forKey:@"UnCurlAnim"];
 				int targetPage = [[loadedEpub.spineArray objectAtIndex:(currentSpineIndex-1)] pageCount];
 				[self loadSpine:--currentSpineIndex atPageIndex:targetPage-1];
 			}
 		}
 	}
 }
-
 
 - (IBAction) increaseTextSizeClicked:(id)sender{
 	if(!paginating){
@@ -381,6 +407,18 @@
 	}
 }
 
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	
+	float x = [((UITouch*)[touches anyObject]) locationInView:self.view].x;
+	
+	if(x < 150){
+		//touch to the left
+		[self gotoPrevPage];
+	}else {
+		//touch to the right
+		[self gotoNextPage];
+	}
+}
 
 #pragma mark -
 #pragma mark Rotation support
