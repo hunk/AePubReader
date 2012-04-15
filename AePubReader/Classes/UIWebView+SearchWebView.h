@@ -5,5 +5,6 @@
 
 - (NSInteger)highlightAllOccurencesOfString:(NSString*)str;
 - (void)removeAllHighlights;
+- (void)searchAchor:(NSString*)str;
 
 @end

@@ -93,3 +93,31 @@ function MyApp_RemoveAllHighlights() {
     MyApp_SearchResultCount = 0;
     MyApp_RemoveAllHighlightsForElement(document.body);
 }
+
+// search position of achor
+function MyApp_Achor(idName) {
+    MyApp_AchorForElement(document.body, idName);
+}
+
+// helper function, recursively for found achor
+function MyApp_AchorForElement(element,idName) {
+    if (element) {
+        if (element.nodeType == 1) {
+            if (element.getAttribute("id") == idName) {
+                results = getPos(element).y;
+                return true;
+            } else {
+                var normalize = false;
+                for (var i=element.childNodes.length-1; i>=0; i--) {
+                    if (MyApp_AchorForElement(element.childNodes[i],idName)) {
+                        normalize = true;
+                    }
+                }
+                if (normalize) {
+                    element.normalize();
+                }
+            }
+        }
+    }
+    return false;
+}

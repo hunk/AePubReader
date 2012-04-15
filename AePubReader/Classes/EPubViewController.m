@@ -15,6 +15,7 @@
 
 #import "FontView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SearchAchorVC.h"
 
 @interface EPubViewController()
 
@@ -42,7 +43,7 @@
 @synthesize chapterListButton, decTextSizeButton, incTextSizeButton;
 @synthesize currentPageLabel, pageSlider, searching;
 @synthesize currentSearchResult;
-@synthesize fontListButton;
+@synthesize fontListButton,currentFontText;
 
 #pragma mark -
 
@@ -271,6 +272,39 @@
 	}
 }
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+	if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+		
+        //path to called chapter
+        NSURL *url = [request  URL];
+		
+		NSString *newChapterURL = [url path];
+		NSString *achor = [url fragment];
+
+		if (achor) {
+
+			int indexNewChapter = -1;
+			NSString *path;
+		
+			for (int i=0; i<loadedEpub.spineArray.count & indexNewChapter == -1; i++) {
+			
+				path = ((Chapter*)[loadedEpub.spineArray objectAtIndex:i]).spinePath;
+			
+				if([path isEqualToString:newChapterURL]){
+					indexNewChapter = i;
+				}
+			}
+
+			SearchAchorVC *svc = [[SearchAchorVC alloc] init];
+			svc.epubViewController = self;
+			[svc searchString:url.fragment atChapterIndex:indexNewChapter];
+		
+			return NO;
+		}
+    }
+	
+    return YES;
+}
 
 - (void)webViewDidFinishLoad:(UIWebView *)theWebView{
 	
@@ -419,6 +453,7 @@
 		[self gotoNextPage];
 	}
 }
+
 
 #pragma mark -
 #pragma mark Rotation support

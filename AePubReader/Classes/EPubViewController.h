@@ -89,4 +89,6 @@
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *fontListButton;
 
+@property (nonatomic,retain) NSString *currentFontText;
+
 @end

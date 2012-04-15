@@ -106,7 +106,7 @@
 	NSString *insertRule1 = [NSString stringWithFormat:@"addCSSRule('html', 'padding: 0px; height: %fpx; -webkit-column-gap: 0px; -webkit-column-width: %fpx;')", webView.frame.size.height, webView.frame.size.width];
 	NSString *insertRule2 = [NSString stringWithFormat:@"addCSSRule('p', 'text-align: justify;')"];
 	NSString *setTextSizeRule = [NSString stringWithFormat:@"addCSSRule('body', '-webkit-text-size-adjust: %d%%;')",[[epubViewController.loadedEpub.spineArray objectAtIndex:currentChapterIndex] fontPercentSize]];
-    
+    NSString *setFontFamilyRule = [NSString stringWithFormat:@"addCSSRule('body', 'font-family:\"%@\" !important;')", epubViewController.currentFontText];
 	
 	[webView stringByEvaluatingJavaScriptFromString:varMySheet];
 	
@@ -117,6 +117,8 @@
 	[webView stringByEvaluatingJavaScriptFromString:insertRule2];
 	
     [webView stringByEvaluatingJavaScriptFromString:setTextSizeRule];
+	
+	[webView stringByEvaluatingJavaScriptFromString:setFontFamilyRule];
     
     [webView highlightAllOccurencesOfString:currentQuery];
     
