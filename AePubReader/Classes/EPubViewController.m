@@ -40,10 +40,11 @@
 @implementation EPubViewController
 
 @synthesize loadedEpub, toolbar, webView; 
-@synthesize chapterListButton, decTextSizeButton, incTextSizeButton;
+@synthesize chapterListButton;
 @synthesize currentPageLabel, pageSlider, searching;
 @synthesize currentSearchResult;
 @synthesize fontListButton,currentFontText;
+@synthesize paginating;
 
 #pragma mark -
 
@@ -236,33 +237,10 @@
 	}
 }
 
-- (IBAction) increaseTextSizeClicked:(id)sender{
-	if(!paginating){
-		if(currentTextSize+25<=200){
-			currentTextSize+=25;
-			[self updatePagination];
-			if(currentTextSize == 200){
-				[incTextSizeButton setEnabled:NO];
-			}
-			[decTextSizeButton setEnabled:YES];
-			
-			[self saveConfHTML];
-		}
-	}
-}
-- (IBAction) decreaseTextSizeClicked:(id)sender{
-	if(!paginating){
-		if(currentTextSize-25>=50){
-			currentTextSize-=25;
-			[self updatePagination];
-			if(currentTextSize==50){
-				[decTextSizeButton setEnabled:NO];
-			}
-			[incTextSizeButton setEnabled:YES];
-			
-			[self saveConfHTML];
-		}
-	}
+-(void)changeFontSize:(int)fontSize{
+	currentTextSize = fontSize;
+	[self updatePagination];
+	[self saveConfHTML];
 }
 
 - (IBAction) doneClicked:(id)sender{
@@ -441,7 +419,8 @@
 	if (![fontPopover isPopoverVisible]) {
 	
 		[fontView setFontName:currentFontText];
-		[fontView resetButtonsTextColors];
+		[fontView setFontSize:currentTextSize];
+		[fontView resetButtons];
 		[chaptersPopover presentPopoverFromBarButtonItem:chapterListButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 		
 		[fontPopover presentPopoverFromBarButtonItem:fontListButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -548,8 +527,6 @@
 	self.toolbar = nil;
 	self.webView = nil;
 	self.chapterListButton = nil;
-	self.decTextSizeButton = nil;
-	self.incTextSizeButton = nil;
 	self.pageSlider = nil;
 	self.currentPageLabel = nil;	
 }
@@ -571,8 +548,6 @@
     self.toolbar = nil;
 	self.webView = nil;
 	self.chapterListButton = nil;
-	self.decTextSizeButton = nil;
-	self.incTextSizeButton = nil;
 	self.pageSlider = nil;
 	self.currentPageLabel = nil;
 	[loadedEpub release];

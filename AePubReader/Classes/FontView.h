@@ -16,16 +16,21 @@
 	IBOutlet UIButton *fontNameBt3;
 	IBOutlet UIButton *fontNameBt4;
 	
+	IBOutlet UIButton *fontSizea;
+	IBOutlet UIButton *fontSizeA;
+	
 	NSString *fontName;
+	int fontSize;
 	
 	EPubViewController* epubViewController;
 }
 
 @property (nonatomic,retain) IBOutlet NSString *fontName;
+@property (nonatomic) int fontSize;
 @property(nonatomic, assign) EPubViewController* epubViewController;
 
 -(IBAction)fontNameAction:(id)sender;
 
--(void)resetButtonsTextColors;
+-(void)resetButtons;
 
 @end

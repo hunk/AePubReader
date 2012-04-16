@@ -16,30 +16,69 @@
 
 @synthesize fontName;
 @synthesize epubViewController;
+@synthesize fontSize;
 
--(void)resetButtonsTextColors {
+-(void)resetButtons {
 	NSArray *buttons = [NSArray arrayWithObjects: fontNameBt1, fontNameBt2, fontNameBt3, fontNameBt4, nil];
 	
 	for(UIButton *bt in buttons) {
+	
+		
+		[bt setTitleColor:[UIColor colorWithRed:0.196 green:0.310 blue:0.522 alpha:1.000] forState:UIControlStateNormal];
+		
 		if([bt.titleLabel.text isEqualToString:self.fontName]) {
-            bt.alpha = 1;
-		}
-		else {
-			bt.alpha = .5;
+			[bt setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
 		}
 	}
 	
-	NSLog(@"la actual fuente es %@",self.fontName);
+	[fontSizeA setEnabled:YES];
+	[fontSizea setEnabled:YES];
+	[fontSizeA setAlpha:1];
+	[fontSizea setAlpha:1];
+	if (fontSize == 200) {
+		[fontSizeA setEnabled:NO];
+		[fontSizeA setAlpha:.5];
+	}
+	if (fontSize == 50) {
+		[fontSizea setEnabled:NO];
+		[fontSizea setAlpha:.5];
+	}
+
+}
+
+-(IBAction)fontSizeAction:(id)s {
+	
+	if (self.epubViewController.paginating) {
+		return;
+	}
+	
+	if([s tag] == 0){
+		if(fontSize-25>=50){
+			fontSize-=25;
+			[self.epubViewController changeFontSize:fontSize];
+		}
+	}else{
+		if(fontSize+25<=200){
+			fontSize+=25;
+			[self.epubViewController changeFontSize:fontSize];
+		}	
+	}
+	
+	[self resetButtons];
 }
 
 
 -(IBAction)fontNameAction:(id)sender{
 
+	if (self.epubViewController.paginating) {
+		return;
+	}
+	//if(!paginating){
+	
 	UIButton *bt = (UIButton*)sender;
-	NSLog(@"selecciono %@",bt.titleLabel.text);
 	
 	self.fontName = bt.titleLabel.text;
-	[self resetButtonsTextColors];
+	[self resetButtons];
 	[self.epubViewController changeFont:self.fontName];
 }
 

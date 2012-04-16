@@ -22,9 +22,6 @@
 	UIWebView *webView;
     
     UIBarButtonItem* chapterListButton;
-	
-	UIBarButtonItem* decTextSizeButton;
-	UIBarButtonItem* incTextSizeButton;
     
     UISlider* pageSlider;
     UILabel* currentPageLabel;
@@ -54,8 +51,6 @@
 }
 
 - (IBAction) showChapterIndex:(id)sender;
-- (IBAction) increaseTextSizeClicked:(id)sender;
-- (IBAction) decreaseTextSizeClicked:(id)sender;
 - (IBAction) fontClicked:(id)sender;
 - (IBAction) slidingStarted:(id)sender;
 - (IBAction) slidingEnded:(id)sender;
@@ -70,6 +65,7 @@
 -(void)loadConfHTML;
 -(void)saveConfHTML;
 -(void)changeFont:(NSString*)fontName;
+-(void)changeFontSize:(int)fontSize;
 
 @property (nonatomic, retain) EPub* loadedEpub;
 
@@ -81,13 +77,11 @@
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *chapterListButton;
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *decTextSizeButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *incTextSizeButton;
-
 @property (nonatomic, retain) IBOutlet UISlider *pageSlider;
 @property (nonatomic, retain) IBOutlet UILabel *currentPageLabel;
 
 @property BOOL searching;
+@property BOOL paginating;
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *fontListButton;
 
