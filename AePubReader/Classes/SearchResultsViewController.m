@@ -44,7 +44,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     SearchResult* hit = (SearchResult*)[results objectAtIndex:[indexPath row]];
 
-    [epubViewController loadSpine:hit.chapterIndex atPageIndex:hit.pageIndex highlightSearchResult:hit];    
+    //[epubViewController loadSpine:hit.chapterIndex atPageIndex:hit.pageIndex highlightSearchResult:hit];    
+	[epubViewController gotoLoadSpine:hit.chapterIndex atPageIndex:hit.pageIndex highlightSearchResult:hit];
 }
 
 - (void) searchString:(NSString*)query{

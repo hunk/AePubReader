@@ -63,6 +63,8 @@
 
 - (void) loadSpine:(int)spineIndex atPageIndex:(int)pageIndex highlightSearchResult:(SearchResult*)theResult;
 
+- (void) gotoLoadSpine:(int)spineIndex atPageIndex:(int)pageIndex highlightSearchResult:(SearchResult*)theResult;
+
 - (void) loadEpub:(NSURL*) epubURL;
 
 -(void)loadConfHTML;

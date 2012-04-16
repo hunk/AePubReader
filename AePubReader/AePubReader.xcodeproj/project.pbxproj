@@ -13,6 +13,11 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		B4513B95153B83DA00B0A0CF /* SearchAchorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B4513B94153B83DA00B0A0CF /* SearchAchorVC.m */; };
+		B4798458153A6B9200104AE5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B4798457153A6B9200104AE5 /* libz.dylib */; };
+		B4798469153A7D7800104AE5 /* FontView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4798467153A7D7700104AE5 /* FontView.m */; };
+		B479846A153A7D7800104AE5 /* FontView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4798468153A7D7800104AE5 /* FontView.xib */; };
+		B4798470153A8D3300104AE5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B479846F153A8D3300104AE5 /* QuartzCore.framework */; };
 		FA11955A13BA921100025A2B /* UIWebView+SearchWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11955913BA921100025A2B /* UIWebView+SearchWebView.m */; };
 		FA11956013BA924400025A2B /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11955E13BA924400025A2B /* GTMNSString+HTML.m */; };
 		FA11956113BA924400025A2B /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11955F13BA924400025A2B /* NSString+HTML.m */; };
@@ -48,7 +53,6 @@
 		FAFA8EA9134A06D6000291E2 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = FAFA8EA2134A06D6000291E2 /* unzip.c */; };
 		FAFA8EAA134A06D6000291E2 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = FAFA8EA4134A06D6000291E2 /* zip.c */; };
 		FAFA8EAB134A06D6000291E2 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAFA8EA6134A06D6000291E2 /* ZipArchive.mm */; };
-		FAFA8EF8134A0D0A000291E2 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAFA8EF7134A0D0A000291E2 /* libz.1.2.3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +66,13 @@
 		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AePubReader-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AePubReader-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		B4513B93153B83DA00B0A0CF /* SearchAchorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAchorVC.h; sourceTree = "<group>"; };
+		B4513B94153B83DA00B0A0CF /* SearchAchorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAchorVC.m; sourceTree = "<group>"; };
+		B4798457153A6B9200104AE5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		B4798466153A7D7700104AE5 /* FontView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontView.h; sourceTree = "<group>"; };
+		B4798467153A7D7700104AE5 /* FontView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontView.m; sourceTree = "<group>"; };
+		B4798468153A7D7800104AE5 /* FontView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontView.xib; sourceTree = "<group>"; };
+		B479846F153A8D3300104AE5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FA11955813BA921100025A2B /* UIWebView+SearchWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+SearchWebView.h"; sourceTree = "<group>"; };
 		FA11955913BA921100025A2B /* UIWebView+SearchWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+SearchWebView.m"; sourceTree = "<group>"; };
 		FA11955B13BA924400025A2B /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -127,7 +138,6 @@
 		FAFA8EA4134A06D6000291E2 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
 		FAFA8EA5134A06D6000291E2 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		FAFA8EA6134A06D6000291E2 /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
-		FAFA8EF7134A0D0A000291E2 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,10 +145,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4798470153A8D3300104AE5 /* QuartzCore.framework in Frameworks */,
+				B4798458153A6B9200104AE5 /* libz.dylib in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
-				FAFA8EF8134A0D0A000291E2 /* libz.1.2.3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +182,11 @@
 				FA11955D13BA924400025A2B /* NSString+HTML.h */,
 				FA11955E13BA924400025A2B /* GTMNSString+HTML.m */,
 				FA11955F13BA924400025A2B /* NSString+HTML.m */,
+				B4798466153A7D7700104AE5 /* FontView.h */,
+				B4798467153A7D7700104AE5 /* FontView.m */,
+				B4798468153A7D7800104AE5 /* FontView.xib */,
+				B4513B93153B83DA00B0A0CF /* SearchAchorVC.h */,
+				B4513B94153B83DA00B0A0CF /* SearchAchorVC.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -186,6 +202,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				B479846F153A8D3300104AE5 /* QuartzCore.framework */,
+				B4798457153A6B9200104AE5 /* libz.dylib */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -224,7 +242,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FAFA8EF7134A0D0A000291E2 /* libz.1.2.3.dylib */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
@@ -376,6 +393,7 @@
 				FA881E501372CA9200FBD25F /* yellowslide.png in Resources */,
 				FA881E5A1372E96000FBD25F /* SearchResultsViewController.xib in Resources */,
 				FA11956613BA93F100025A2B /* EPubView.xib in Resources */,
+				B479846A153A7D7800104AE5 /* FontView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +433,8 @@
 				FA11956013BA924400025A2B /* GTMNSString+HTML.m in Sources */,
 				FA11956113BA924400025A2B /* NSString+HTML.m in Sources */,
 				FA11956413BA92CD00025A2B /* EPubViewController.m in Sources */,
+				B4798469153A7D7800104AE5 /* FontView.m in Sources */,
+				B4513B95153B83DA00B0A0CF /* SearchAchorVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

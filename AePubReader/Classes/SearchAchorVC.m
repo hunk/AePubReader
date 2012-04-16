@@ -84,10 +84,10 @@
 		//found!!
 		int y = [foundHit intValue];
 		int page = y/webView.bounds.size.height;
-		[epubViewController loadSpine:currentChapterIndex atPageIndex:page highlightSearchResult:nil];
+		[epubViewController gotoLoadSpine:currentChapterIndex atPageIndex:page highlightSearchResult:nil];
 
 	}else {
-		[epubViewController loadSpine:currentChapterIndex atPageIndex:0 highlightSearchResult:nil];
+		[epubViewController gotoLoadSpine:currentChapterIndex atPageIndex:0 highlightSearchResult:nil];
 	}
 }
 

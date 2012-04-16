@@ -89,6 +89,46 @@
 	[self loadSpine:spineIndex atPageIndex:pageIndex highlightSearchResult:nil];
 }
 
+- (void) gotoLoadSpine:(int)spineIndex atPageIndex:(int)pageIndex highlightSearchResult:(SearchResult*)theResult{
+	
+	int dir = 0;
+	
+	if (spineIndex < currentSpineIndex) {
+		//right
+		dir = -1;
+	}else if (spineIndex > currentSpineIndex) {
+		// left
+		dir = 1;
+	}else {
+		if (pageIndex < currentPageInSpineIndex) {
+			//right
+			dir = -1;
+		}else if (pageIndex > currentPageInSpineIndex) {
+			//left
+			dir = 1;
+		}
+	}
+	
+	if (dir == 1) {
+		CATransition *transition = [CATransition animation];
+		[transition setDelegate:self];
+		[transition setDuration:0.5f];
+		[transition setType:@"pageCurl"];
+		[transition setSubtype:@"fromRight"];
+		[self.view.layer addAnimation:transition forKey:@"CurlAnim"];
+	}else if (dir == -1) {
+		CATransition *transition = [CATransition animation];
+		[transition setDelegate:self];
+		[transition setDuration:0.5f];
+		[transition setType:@"pageUnCurl"];
+		[transition setSubtype:@"fromRight"];
+		[self.view.layer addAnimation:transition forKey:@"UnCurlAnim"];
+	}
+	
+	[self loadSpine:spineIndex atPageIndex:pageIndex highlightSearchResult:theResult];
+	
+}
+
 - (void) loadSpine:(int)spineIndex atPageIndex:(int)pageIndex highlightSearchResult:(SearchResult*)theResult{
 	
 	webView.hidden = YES;
