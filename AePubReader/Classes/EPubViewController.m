@@ -49,8 +49,7 @@
 #pragma mark -
 
 - (void) loadEpub:(NSURL*) epubURL{
-    currentSpineIndex = 0;
-    currentPageInSpineIndex = 0;
+			[self loadConfHTML];
     pagesInCurrentSpineCount = 0;
     totalPagesCount = 0;
 	searching = NO;
@@ -58,6 +57,7 @@
     self.loadedEpub = [[EPub alloc] initWithEPubPath:[epubURL path]];
     epubLoaded = YES;
     NSLog(@"loadEpub");
+
 	[self updatePagination];
 }
 
@@ -169,7 +169,9 @@
 	}
 	
 	webView.hidden = NO;
+	[self saveConfHTML];
 	
+	NSLog(@"aqui uno");
 }
 
 - (void) gotoNextSpine {
@@ -366,9 +368,18 @@
 	
 	
 	int totalWidth = [[webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollWidth"] intValue];
-	pagesInCurrentSpineCount = (int)((float)totalWidth/webView.bounds.size.width);
 	
-	[self gotoPageInCurrentSpine:currentPageInSpineIndex];
+	[webView stringByEvaluatingJavaScriptFromString:insertRule1];
+	
+	totalWidth = [[webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollWidth"] intValue];
+	
+	if (webView.scrollView.contentSize.height != webView.frame.size.height) {
+		[self loadSpine:currentSpineIndex atPageIndex:currentPageInSpineIndex];
+	}else {
+	
+		pagesInCurrentSpineCount = (int)((float)totalWidth/webView.bounds.size.width);
+		[self gotoPageInCurrentSpine:currentPageInSpineIndex];
+	}
 }
 
 - (void) updatePagination{
@@ -441,6 +452,8 @@
 	NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
 	[defs setInteger:currentTextSize forKey:@"fontSize"];
 	[defs setObject:currentFontText forKey:@"fontName"];
+	[defs setInteger:currentSpineIndex forKey:@"currentSpineIndex"];
+	[defs setInteger:currentPageInSpineIndex forKey:@"currentPageInSpineIndex"];
 	[defs synchronize];
 }
 
@@ -458,6 +471,18 @@
 	
 	if (fName) {
 		currentFontText = fName;
+	}
+	
+	int cSpineIndex = [defs integerForKey:@"currentSpineIndex"];
+	
+	if(cSpineIndex) {
+		currentSpineIndex = cSpineIndex;
+	}
+	
+	int cPageInSpineIndex = [defs integerForKey:@"currentPageInSpineIndex"];
+	
+	if(cPageInSpineIndex) {
+		currentPageInSpineIndex = cPageInSpineIndex;
 	}
 }
 
@@ -503,7 +528,8 @@
 	}
 	currentTextSize = 100;
 	currentFontText = @"Times New Roman";
-	[self loadConfHTML];
+	currentSpineIndex = 0;
+    currentPageInSpineIndex = 0;
 	
 	
 	UISwipeGestureRecognizer* rightSwipeRecognizer = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gotoNextPage)] autorelease];
