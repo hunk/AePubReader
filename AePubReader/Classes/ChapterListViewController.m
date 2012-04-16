@@ -113,7 +113,8 @@
 {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [epubViewController loadSpine:[indexPath row] atPageIndex:0 highlightSearchResult:nil];
+    //[epubViewController loadSpine:[indexPath row] atPageIndex:0 highlightSearchResult:nil];
+	[epubViewController gotoLoadSpine:[indexPath row] atPageIndex:0 highlightSearchResult:nil];
 }
 
 @end

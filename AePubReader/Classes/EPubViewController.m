@@ -294,7 +294,8 @@
 			break;
 		}
 	}
-	[self loadSpine:chapterIndex atPageIndex:pageIndex];
+	//[self loadSpine:chapterIndex atPageIndex:pageIndex];
+	[self gotoLoadSpine:chapterIndex atPageIndex:pageIndex highlightSearchResult:nil];
 }
 
 - (IBAction) showChapterIndex:(id)sender{
