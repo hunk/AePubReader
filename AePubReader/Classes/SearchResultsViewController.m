@@ -108,6 +108,7 @@
 	NSString *insertRule2 = [NSString stringWithFormat:@"addCSSRule('p', 'text-align: justify;')"];
 	NSString *setTextSizeRule = [NSString stringWithFormat:@"addCSSRule('body', '-webkit-text-size-adjust: %d%%;')",[[epubViewController.loadedEpub.spineArray objectAtIndex:currentChapterIndex] fontPercentSize]];
     NSString *setFontFamilyRule = [NSString stringWithFormat:@"addCSSRule('body', 'font-family:\"%@\" !important;')", epubViewController.currentFontText];
+	NSString *setImageRule = [NSString stringWithFormat:@"addCSSRule('img', 'max-width: %fpx; height:auto;')", webView.frame.size.width *0.75];
 	
 	[webView stringByEvaluatingJavaScriptFromString:varMySheet];
 	
@@ -120,6 +121,8 @@
     [webView stringByEvaluatingJavaScriptFromString:setTextSizeRule];
 	
 	[webView stringByEvaluatingJavaScriptFromString:setFontFamilyRule];
+	
+	[webView stringByEvaluatingJavaScriptFromString:setImageRule];
     
     [webView highlightAllOccurencesOfString:currentQuery];
     

@@ -345,6 +345,8 @@
 	NSString *setTextSizeRule = [NSString stringWithFormat:@"addCSSRule('body', '-webkit-text-size-adjust: %d%%;')", currentTextSize];
 	NSString *setFontFamilyRule = [NSString stringWithFormat:@"addCSSRule('body', 'font-family:\"%@\" !important;')", currentFontText];
 	NSString *setHighlightColorRule = [NSString stringWithFormat:@"addCSSRule('highlight', 'background-color: yellow;')"];
+	
+	NSString *setImageRule = [NSString stringWithFormat:@"addCSSRule('img', 'max-width: %fpx; height:auto;')", self.webView.frame.size.width *0.75];
 
 	
 	[webView stringByEvaluatingJavaScriptFromString:varMySheet];
@@ -360,6 +362,8 @@
 	[webView stringByEvaluatingJavaScriptFromString:setFontFamilyRule];
 	
 	[webView stringByEvaluatingJavaScriptFromString:setHighlightColorRule];
+	
+	[webView stringByEvaluatingJavaScriptFromString:setImageRule];
 	
 	if(currentSearchResult!=nil){
 	//	NSLog(@"Highlighting %@", currentSearchResult.originatingQuery);
@@ -432,7 +436,6 @@
 		[fontView setFontName:currentFontText];
 		[fontView setFontSize:currentTextSize];
 		[fontView resetButtons];
-		[chaptersPopover presentPopoverFromBarButtonItem:chapterListButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 		
 		[fontPopover presentPopoverFromBarButtonItem:fontListButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 	}
@@ -517,6 +520,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[webView setDelegate:self];
+	
+	webView.opaque = NO;
 		
 	UIScrollView* sv = nil;
 	for (UIView* v in  webView.subviews) {

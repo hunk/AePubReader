@@ -165,8 +165,8 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="339016764"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAxIDEAA</bytes>
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -476,18 +476,14 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>decreaseTextSizeClicked:</string>
 							<string>doneClicked:</string>
 							<string>fontClicked:</string>
-							<string>increaseTextSizeClicked:</string>
 							<string>showChapterIndex:</string>
 							<string>slidingEnded:</string>
 							<string>slidingStarted:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -499,10 +495,8 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>decreaseTextSizeClicked:</string>
 							<string>doneClicked:</string>
 							<string>fontClicked:</string>
-							<string>increaseTextSizeClicked:</string>
 							<string>showChapterIndex:</string>
 							<string>slidingEnded:</string>
 							<string>slidingStarted:</string>
@@ -510,19 +504,11 @@
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
-								<string key="name">decreaseTextSizeClicked:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
 								<string key="name">doneClicked:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">fontClicked:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">increaseTextSizeClicked:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -545,9 +531,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>chapterListButton</string>
 							<string>currentPageLabel</string>
-							<string>decTextSizeButton</string>
 							<string>fontListButton</string>
-							<string>incTextSizeButton</string>
 							<string>pageSlider</string>
 							<string>toolbar</string>
 							<string>webView</string>
@@ -556,8 +540,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIBarButtonItem</string>
 							<string>UILabel</string>
-							<string>UIBarButtonItem</string>
-							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UISlider</string>
 							<string>UIToolbar</string>
@@ -570,9 +552,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>chapterListButton</string>
 							<string>currentPageLabel</string>
-							<string>decTextSizeButton</string>
 							<string>fontListButton</string>
-							<string>incTextSizeButton</string>
 							<string>pageSlider</string>
 							<string>toolbar</string>
 							<string>webView</string>
@@ -588,15 +568,7 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">decTextSizeButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">fontListButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">incTextSizeButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">

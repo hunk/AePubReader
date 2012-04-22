@@ -64,6 +64,8 @@
     
 	NSString *setFontFamilyRule = [NSString stringWithFormat:@"addCSSRule('body', 'font-family:\"%@\" !important;')", epubViewController.currentFontText];
 	
+	NSString *setImageRule = [NSString stringWithFormat:@"addCSSRule('img', 'max-width: %fpx; height:auto;')", webView.frame.size.width *0.75];
+	
 	[webView stringByEvaluatingJavaScriptFromString:varMySheet];
 	
 	[webView stringByEvaluatingJavaScriptFromString:addCSSRule];
@@ -75,6 +77,8 @@
     [webView stringByEvaluatingJavaScriptFromString:setTextSizeRule];
 	
 	[webView stringByEvaluatingJavaScriptFromString:setFontFamilyRule];
+	
+	[webView stringByEvaluatingJavaScriptFromString:setImageRule];
     
     [webView searchAchor:currentQuery];
     
